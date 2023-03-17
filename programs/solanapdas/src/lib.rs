@@ -43,6 +43,7 @@ pub mod solanapdas {
             return Err(ProgramError::InsufficientFunds);
         }
         **bank.to_account_info().try_borrow_mut_lamports()? -= amount;
+        bank.balance -= amount;
         **user.to_account_info().try_borrow_mut_lamports()? += amount;
         Ok(())
     }
