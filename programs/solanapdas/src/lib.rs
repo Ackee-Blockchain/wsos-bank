@@ -12,7 +12,7 @@ pub mod solanapdas {
         bank.name = name;
         bank.balance = 0;
         bank.owner = *ctx.accounts.user.key;
-        Ok({})
+        Ok(())
     }
 
     pub fn deposit(ctx: Context<Deposit>, amount: u64) -> ProgramResult {
@@ -28,7 +28,7 @@ pub mod solanapdas {
                 ctx.accounts.bank.to_account_info()
             ],
         )?;
-        (&mut ctx.accounts.bank).balance += amount;
+        ctx.accounts.bank.balance += amount;
         Ok(())
     }
 
@@ -80,5 +80,3 @@ pub struct Withdraw<'info>{
     #[account(mut)]
     pub user: Signer<'info>,
 }
-
-
